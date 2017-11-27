@@ -11,8 +11,8 @@ import gym
 # for more steps. define new cartpole
 from gym.envs.registration import register
 register( id='CartPole-v2',
-          entry_point='gym.envs.classic_control:CartPoleEnv',
-          tags={'wrapper_config.TimeLimit.max_episode_steps': 1000},)
+         entry_point='gym.envs.classic_control:CartPoleEnv',
+         tags={'wrapper_config.TimeLimit.max_episode_steps': 10002},)
 env = gym.make('CartPole-v2')
 
 class DQN:
