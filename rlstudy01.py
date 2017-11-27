@@ -4,10 +4,16 @@
 import numpy as np
 import tensorflow as tf
 import random
-from collections import deque
 
+from collections import deque
 import gym
-env = gym.make('CartPole-v0')
+
+# for more steps. define new cartpole
+from gym.envs.registration import register
+register( id='CartPole-v2',
+          entry_point='gym.envs.classic_control:CartPoleEnv',
+          tags={'wrapper_config.TimeLimit.max_episode_steps': 1000},)
+env = gym.make('CartPole-v2')
 
 class DQN:
     def __init__(self, session, input_size, output_size, name="main"):
