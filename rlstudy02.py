@@ -12,7 +12,7 @@ import gym
 from gym.envs.registration import register
 register( id='CartPole-v2',
          entry_point='gym.envs.classic_control:CartPoleEnv',
-         tags={'wrapper_config.TimeLimit.max_episode_steps': 10002},)
+         tags={'wrapper_config.TimeLimit.max_episode_steps': 100002},)
 env = gym.make('CartPole-v2')
 
 class DQN:
@@ -111,7 +111,7 @@ def get_copy_var_ops(dest_scope_name="target", src_scope_name="main"):
 
 def main():
     max_episodes = 5000
-
+    success_cnt = 0
     # store the previos observations in replay memory
     replay_buffer = deque()
 
@@ -153,7 +153,12 @@ def main():
 
             print ("Epsiode : {} steps: {}".format(episode, step_count))
             if step_count > 10000:
+                success_cnt += 1
+                if success_cnt > 20:
+                    break;
                 pass
+            else:
+                success_cnt = 0
 
             if episode % 10 == 1:
                 # Get a random batch of experiences.
